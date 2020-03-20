@@ -1,6 +1,6 @@
 (async function(window, document){
   if(typeof window === 'undefined'){ return; }
-  const { render, accordionTemplate, tabTemplate } = await import('./panel-set-helpers.mjs');
+  const { render, renderTemplates } = await import('./panel-set-helpers.mjs');
   const customElementName = 'panel-set';
 
   if (!window.customElements.get(customElementName)) {
@@ -28,14 +28,15 @@
           if (name === 'active-panel') {
             this.activePanel = isIntegerAndGreaterThanZero ? int : this.activePanel;
           }
+          if(this.root){
+            this.root.querySelector('#template-container').innerHTML = renderTemplates(this);
+          }
         }
 
         connectedCallback(){
-          if(!this.root) {
-            this.root = this.attachShadow({ mode: 'open' });
-          }
-          window.addEventListener('resize', ()=> render(this, window.matchMedia('screen and (min-width: 720px)').matches ? tabTemplate : accordionTemplate));
-          render(this, window.matchMedia('screen and (min-width: 720px)').matches ? tabTemplate : accordionTemplate);
+          if(!this.root) { this.root = this.attachShadow({ mode: 'open' }); }
+          window.addEventListener('resize', ()=> render(this));
+          render(this);
         }
 
         disconnectedCallback(){
