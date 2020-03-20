@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>panel-set demo</title>
+    <script async type="module" src="panel-set.mjs"></script>
+    <style>
+      #my-panel-set::part(ps-details) {
+        min-height: 16px;
+        background-color: red;
+      }
+      #my-panel-set::part(ps-summary) {
+        min-height: 16px;
+        background-color: gray;
+      }
+      #my-panel-set::part(ps-tabs) {
+        color: red;
+      }
+      #my-panel-set::part(ps-panels) {
+        min-height: 16px;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <panel-set id="my-panel-set">
+      <a href="" id="tab-1" slot="ps:tab-1">panel 1</a>
+      <div aria-labelledby="tab-1" slot="ps:panel-1">
+        <!-- content -->
+      </div>
+      <a href="" id="tab-2" slot="ps:tab-2">panel 2</a>
+      <div active aria-labelledby="tab-2" slot="ps:panel-2">
+        <!-- content -->
+      </div>
+    </panel-set>
+  </body>
+</html>
