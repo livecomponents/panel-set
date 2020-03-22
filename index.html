@@ -6,26 +6,29 @@
     <title>panel-set demo</title>
     <script async type="module" src="panel-set.mjs"></script>
     <style>
+      body {
+        margin: 0;
+      }
       /*
         test: MacBook pro (mojave v10.14.1)
               Desktop Safari v12.0.1
         result: "::part()" does not work in webkit
       */
-      #my-panel-set::part(ps-details) {
+      /* #my-panel-set::part(ps-details) {
         min-height: 16px;
         background-color: red;
-      }
-      #my-panel-set::part(ps-summary) {
+      } */
+      /* #my-panel-set::part(ps-summary) {
         min-height: 16px;
         background-color: gray;
-      }
-      #my-panel-set::part(ps-tabs) {
+      } */
+      /* #my-panel-set::part(ps-tabs) {
         color: red;
-      }
-      #my-panel-set::part(ps-panels) {
+      } */
+      /* #my-panel-set::part(ps-panels) {
         min-height: 16px;
         background-color: yellow;
-      }
+      } */
     </style>
   </head>
   <body>
@@ -47,7 +50,7 @@
         <li>basil (2 tsp)</li>
         <li>oregano (2 tbsp)</li>
       </ul>
-      <a href="" id="tab-2" slot="ps:tab-2">Directions</a>
+      <a href="" active id="tab-2" slot="ps:tab-2">Directions</a>
       <ol active aria-labelledby="tab-2" slot="ps:panel-2">
         <li>In a large pot, heat extra virgin olive oil over medium heat</li>
         <li>Stir in the onions, carrots, and celery</li>
@@ -100,5 +103,11 @@ Powered by the ESHA Research Database © 2020,
 ESHA Research, Inc. All Rights Reserved
       </div>
     </panel-set>
+    <script>
+      const panelSet = document.querySelector('#my-panel-set');
+      panelSet.addEventListener('ps:activeChanged', function(evt){
+        console.log(evt.detail);
+      });
+    </script>
   </body>
 </html>

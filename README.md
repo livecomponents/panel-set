@@ -11,17 +11,17 @@ To initialize this component for all supported browsers, you must add scripts to
 <script crossorigin type="module" src="https://somecdn.com/@livecomponents/panel-set/master/panel-set.mjs"></script>
 
 <!-- OPTIONAL: fallback module if BASIC STYLING and MINIMAL FUNCTIONAL SUPPORT for older browsers -->
-<script crossorigin nomodule type="text/javascript" src="https://somecdn.com/@livecomponents/panel-set/master/panel-set.js"></script>
+<script crossorigin nomodule type="text/javascript" src="https://somecdn.com/livecomponents/panel-set/master/panel-set.js"></script>
 ```
 
-#### Minimal HTML Content (for SEO)*
-This is the HTML required to be on page before Google can scan the page for their indexing algorithm. This is usually achieved via `prerendering` or `server side rendering (SSR)`. None of the JavaScript or CSS for the `<panel-set />` is necessary for the page to be indexed.
+#### HTML Content (for SEO)*
+This is the HTML required to be on page before Google/Bing can scan the page for their indexing algorithms. This is usually achieved via 'prerendering' or 'server side rendering (SSR)'. None of the JavaScript or CSS for the `<panel-set />` is necessary for the page to be indexed. No content is required by default to be indexed by search engines but here is an HTML example of how you can add content that will be indexed.
 
 ```html
   <panel-set active-index="0">
-    <a href="" slot="ps:tab-1">First Item Title</a>
+    <a href="" slot="ps:tab-1">panel title </a>
     <div slot="ps:panel-1">
-      First Item content
+      panel content
     </div>
   </panel-set>
 ```
@@ -29,36 +29,53 @@ This is the HTML required to be on page before Google can scan the page for thei
 ### Theming
 Set these values to get different themes.
 
+**Custom Properties**
 | **Variable Name** | **Default Value** |
 | --- | --- |
-| `--ps-thang` | `var(--blah, #3777bc)` |
+| `--ps--border-color` | `#bcbcbc` |
+| `--ps--tab-border-color` | `rgba(255, 255, 255, 0)` |
+| `--ps--tab-border-color--active` | `rgba(255, 255, 255, 1)` |
+| `--ps--tab-text-color` | `inherit` |
+
+**Shadow Parts (*)**
+| **Part Name** | **Summary** |
+| --- | --- |
+| `ps-summary` | |
+| `ps-details` | |
+| `ps-tabs` | |
+| `ps-panels` | |
+
+(*) Not Supported in Webkit based browsers
 
 ### Attributes
-| **name** | **summary** | **expected value** |
-| --- | --- | --- |
-| `active-index` | 'active-index' is something cool | an integer as a string |
+none
+<!-- | **name** | **summary** | **expected value** |
+| --- | --- | --- | -->
 
 ### Slots
 | **name** | **summary** | **type** | **SEO Requirement** |
 | --- | --- | --- | --- |
-| `ps:tab-*` | These are the main navigation links | dynamic | ✅ |
-| `ps:panel-*` | These are the main navigation links | dynamic | ✅ or ❌ |
+| `ps:tab-*` | These are the panel tab links | dynamic | ❌ |
+| `ps:panel-*` | These are panel tab content areas | dynamic | ❌ |
 *(*) can be multiple elements - each incremented by an integer starting with `1`*
+
+<!-- ✅ or ❌ -->
 
 ### Custom Event Hooks
 | **name** | **detail data** | **summary** |
 | --- | --- | --- |
-| `ps:activeElementChanged` | `{ activeIndex: number, activeTab: DOMNode, activePanel: DOMNode }` | triggers when 'active-index' attribute is updated |
+| `ps:tabchange` | `{ activeIndex: number, activeTab: DOMNode, activePanel: DOMNode }` | triggers when 'active' attribute is updated on any slot |
 
 ## Dependencies
-| **name** | **location** | **type** | **reason** | **swappable** |
+npne
+<!-- | **name** | **location** | **type** | **reason** | **swappable** |
 | --- | --- | --- | --- | --- |
-| `<no-element>` | `https://somecdn.com/jkjlkjlkjl` | External Custom Element | provides something cool | ✅ or ❌ |
+| `<no-element>` | `https://somecdn.com/jkjlkjlkjl` | External Custom Element | provides something cool | ✅ or ❌ | -->
 
 ## Customization
 
 ### Hiding Slots
-There might be times where you want to hide a slot but remove the default value. To do this you must add the slot as normal but add an additional `hidden` attribute to it.
+There might be times where you want to hide a slot but remove the default value. To do this you must add the slot as normal but add an additional 'hidden' attribute to it.
 ```html
 <panel-set>
   <!-- other slots can go here ... -->
@@ -67,10 +84,7 @@ There might be times where you want to hide a slot but remove the default value.
 ``` 
 
 #### Current SEO Requirements 
-| **url** | **text** |
-| --- | --- |
-| | |
-
+none
 
 ## Base CSS
 Please note that some CSS is injected to the head of the document on initialization of this codebase (ONLY once). This is done to insure that some styling for slots does not get broken by any CSS reset the application.
