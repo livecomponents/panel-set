@@ -64,7 +64,7 @@ none
 ### Custom Event Hooks
 | **name** | **detail data** | **summary** |
 | --- | --- | --- |
-| `ps:tabchange` | `{ activeIndex: number, activeTab: DOMNode, activePanel: DOMNode }` | triggers when 'active' attribute is updated on any slot |
+| `ps:change` | `{ activeIndex: number | null, activeTab: DOMNode | null, activePanel: DOMNode | null}` | triggers when 'active' attribute is updated on any slot |
 
 ## Dependencies
 npne

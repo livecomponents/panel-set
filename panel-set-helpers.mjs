@@ -189,7 +189,7 @@ export function eventControllers(component){
         component.activeIndex = indx;
         component.activePanel = panels[indx];
         component.activeTab = tabs[indx];
-        component.dispatchEvent(new CustomEvent('ps:activeChanged', { detail: {
+        component.dispatchEvent(new CustomEvent('ps:change', { detail: {
           activeIndex: indx,
           activePanel: panels[indx],
           activeTab: tabs[indx]
