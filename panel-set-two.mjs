@@ -31,10 +31,19 @@
           relatedContent.style.display = "block";
           this.activeTabIndex = i;
           source.tabIndex = 0;
-          requestAnimationFrame(() => source.focus());
+          if (this.matches(':focus-within')) {
+            requestAnimationFrame(() => source.focus());
+          }
         } else {
           source.tabIndex = -1;
           relatedContent.style.display = "none";
+        }
+      });
+      this.shadowRoot.querySelectorAll('x-tab').forEach((el, i) => {
+        if (i===this.activeTabIndex) {
+          el.setAttribute('active','');
+        } else {
+          el.removeAttribute('active');
         }
       });
     }
@@ -63,6 +72,45 @@
           :host([hidden]),
           ::slotted([hidden]) {
             display: none;
+          }
+          
+         
+          :host([theme=default]) [active]{
+            border-bottom: 1px solid white;
+            position:relative;
+            top: 1px;
+            z-index: 2;
+          }
+
+          :host([theme=default]) x-tab {
+            background-color: white;
+            margin: 0;
+            color: black;
+            padding: 0.2rem;
+            border: 1px solid lightgray;
+          }
+
+
+          :host([theme=default]) x-tab > ::slotted(*) {
+            font-size: 1rem;
+            font-weight: normal;
+            color: black;
+            margin: 0.2rem;
+
+          }
+          :host([theme=default]) x-tabs {
+            background-color: transparent;
+            border-bottom: 1px solid lightgray;
+            margin: 0;
+          }
+
+          :host([theme=default]) [default] {
+            display: block;
+            margin-top: -1rem;
+            padding: 0.5rem;
+            background-color: transparent;
+            border: 1px solid lightgray;
+            border-top: none;
           }
           x-tabs { 
             display: flex; 
