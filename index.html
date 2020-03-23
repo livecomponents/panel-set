@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>panel-set demo</title>
     <script async type="module" src="panel-set.mjs"></script>
+    <script async type="module" src="panel-set-two.mjs"></script>
+
     <style>
       body {
         margin: 0;
@@ -103,6 +105,82 @@ Powered by the ESHA Research Database © 2020,
 ESHA Research, Inc. All Rights Reserved
       </div>
     </panel-set>
+    <panel-set-two>
+      <h2 x-title>Ingredients</h2>
+      <div x-content>
+        <ul>
+          <li>garlic</li>
+          <li>onion (8oz)</li>
+          <li>crushed tomatoes (24 oz)</li>
+          <li>water (4 cups)</li>
+          <li>carrots (4 large chopped and peeled)</li>
+          <li>celery (2)</li>
+          <li>extra virgin olive oil (1/3 cup)</li>
+          <li>lentils (2 cups)</li>
+          <li>italian sausage (1 pound)</li>
+          <li>salt (1 tsp)</li>
+          <li>pepper (2 tsp)</li>
+          <li>basil (2 tsp)</li>
+          <li>oregano (2 tbsp)</li>
+        </ul>
+      </div>
+      <h2 x-title>Directions</h2>
+      <div x-content>
+        <ol>
+          <li>In a large pot, heat extra virgin olive oil over medium heat</li>
+          <li>Stir in the onions, carrots, and celery</li>
+          <li>Cook and stir until the onion is tender</li>
+          <li>Mix in garlic, oregano, and basil and cook for 2 minutes</li>
+          <li>Stir in lentils, water, and tomatoes and bring to a boil</li>
+          <li>Reduce heat and simmer for at least 1 hour</li>
+          <li>Season to taste with salt and pepper</li>
+        </ol>
+      </div>
+      <h2 x-title>Nutritional Information</h2>
+      <div x-content>
+        <pre>
+Nutritional Information
+Lentil Soup
+Servings Per Recipe: 6
+Amount Per Serving
+Calories: 349
+% Daily Value *
+Total Fat: 10g
+15 %
+Saturated Fat: 1.0g
+Cholesterol: 0mg
+0 %
+Sodium: 131mg
+5 %
+Potassium: 970mg
+27 %
+Total Carbohydrates: 48.2g
+16 %
+Dietary Fiber: 22.2g
+89 %
+Protein: 18.3g
+37 %
+Sugars: 3g
+Vitamin A: 4230IU
+Vitamin C: 13mg
+Calcium: 98mg
+Iron: 6mg
+Thiamin: 0mg
+Niacin: 6mg
+Vitamin B6: 1mg
+Magnesium: 104mg
+Folate: 334mcg
+*
+Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs.
+**
+Nutrient information is not available for all ingredients. Amount is based on available nutrient data.
+(-)
+Information is not currently available for this nutrient. If you are following a medically restrictive diet, please consult your doctor or registered dietitian before preparing this recipe for personal consumption.
+Powered by the ESHA Research Database © 2020, 
+ESHA Research, Inc. All Rights Reserved</pre
+        >
+      </div>
+    </panel-set-two>
     <script>
       const panelSet = document.querySelector('#my-panel-set');
       panelSet.addEventListener('ps:change', function(evt){
