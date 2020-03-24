@@ -9,7 +9,7 @@
 
     <style>
       body {
-        margin: 0;
+        margin: 1rem;
       }
       /*
         test: MacBook pro (mojave v10.14.1)
@@ -34,7 +34,8 @@
     </style>
   </head>
   <body>
-    <h3>Lentil Soup</h3>
+    <h3>Lentil Soup... two examples</h3>
+    <p>Example A:</p>
     <panel-set id="my-panel-set">
       <a href="" id="tab-1" slot="ps:tab-1">Ingredients</a>
       <ul aria-labelledby="tab-1" slot="ps:panel-1">
@@ -105,7 +106,12 @@ Powered by the ESHA Research Database © 2020,
 ESHA Research, Inc. All Rights Reserved
       </div>
     </panel-set>
-    <panel-set-two>
+
+
+     <p>Example B:</p>
+
+
+    <panel-set-two theme="default">
       <h2 x-title>Ingredients</h2>
       <div x-content>
         <ul>
@@ -136,7 +142,7 @@ ESHA Research, Inc. All Rights Reserved
           <li>Season to taste with salt and pepper</li>
         </ol>
       </div>
-      <h2 x-title>Nutritional Information</h2>
+      <h2 x-title>Nutrition</h2>
       <div x-content>
         <pre>
 Nutritional Information
