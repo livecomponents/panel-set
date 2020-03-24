@@ -11,6 +11,19 @@
       body {
         margin: 1rem;
       }
+      form {
+        margin: 20px 0;
+      }
+      button,
+      input[type=text] {
+        border: solid 1px grey;
+        padding: 8px 10px;
+        color: grey;
+      }
+
+      input[type=text] {
+        width: 200px;
+      }
       /*
         test: MacBook pro (mojave v10.14.1)
               Desktop Safari v12.0.1
@@ -106,12 +119,18 @@ Powered by the ESHA Research Database © 2020,
 ESHA Research, Inc. All Rights Reserved
       </div>
     </panel-set>
-
-
-     <p>Example B:</p>
-
-
+    <p>Example B:</p>
+    <div>
+      <form>
+        <label for="media-val">
+          Enter a valid media query to update the display
+          <input id="media-val" type="text" />
+        </label>
+        <button type="button" id="media-val-exec">Change "&lt;panel-set-two&gt;" media attribute</button>
+      </form>
+    </div>
     <panel-set-two theme="default">
+
       <h2 x-title>Ingredients</h2>
       <div x-content>
         <ul>
@@ -191,6 +210,11 @@ ESHA Research, Inc. All Rights Reserved</pre
       const panelSet = document.querySelector('#my-panel-set');
       panelSet.addEventListener('ps:change', function(evt){
         console.log(evt.detail);
+      });
+      document.getElementById('media-val-exec').addEventListener('click', (evt) => {
+        evt.preventDefault();
+        const inputVal = document.getElementById('media-val').value;
+        document.querySelector('panel-set-two').setAttribute('media', inputVal);
       });
     </script>
   </body>
