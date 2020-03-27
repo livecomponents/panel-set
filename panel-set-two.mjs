@@ -1,14 +1,10 @@
 /* Originally written by Brian Kardell */
 (function() {
   class PanelSetTwo extends HTMLElement {
-    static get observedAttributes() { return [ "display", "media" ]; }
+    static get observedAttributes() { return [ "display" ]; }
 
     attributeChangedCallback(name, oldValue, newValue) {
       requestAnimationFrame(() => {
-        if(!newValue) { return; }
-        if (name === "media") {
-          this._mqDisplayCondition = newValue;
-        }
         if (name === "display") {
           if (newValue === "tabs") {
             this.tabSources
@@ -187,7 +183,7 @@
       // todo: figure this part out dynamically...
       this.activeTabIndex = 0;
       this.activeTab = this.tabSources[0];
-      let mql = window.matchMedia(this._mqDisplayCondition ? this._mqDisplayCondition : "(max-width: 720px)");
+      let mql = window.matchMedia("(max-width: 720px)");
       let mqh = evt => {
         this.setAttribute("display", mql.matches ? "accordion" : "tabs");
       };
