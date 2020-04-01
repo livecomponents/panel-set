@@ -156,10 +156,10 @@
 
         // tabs are -1, they need to use roving focus :(
         tab.tabIndex = -1;
-        tab.role = "tab";
+        tab.setAttribute("role", "tab");
         tab.id = tabUId;
         tab.setAttribute("aria-controls", contentUId);
-        content.role = "tabpanel";
+        content.setAttribute("role", "tabpanel");
         content.tabIndex = 0;
         content.id = contentUId;
         tab._init = true;
