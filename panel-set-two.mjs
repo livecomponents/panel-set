@@ -13,6 +13,11 @@
             this.tabSources
               .forEach(tabSource => tabSource.setAttribute("slot", ""));
           }
+          this.shadowRoot.querySelectorAll('slot').forEach(slotEl => {
+            if (slotEl.assignedElements().length === 0) {
+              slotEl.parentElement.remove()
+            }
+          })
         }
       });
     }
@@ -69,9 +74,17 @@
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = `
         <style>
+          :root {
+            font-size: 1rem;
+          }
+
           :host([hidden]),
           ::slotted([hidden]) {
             display: none;
+          }
+
+          ::slotted(h2[tabIndex="0"]) {
+             text-decoration: underline;   
           }
           
          
@@ -90,12 +103,15 @@
             border: 1px solid lightgray;
           }
 
+          :host([theme=default][display=accordion]) x-tabs {
+            display: none;
+          } 
 
           :host([theme=default]) x-tab > ::slotted(*) {
-            font-size: 1rem;
             font-weight: normal;
             color: black;
             margin: 0.2rem;
+            text-decoration: none;
 
           }
           :host([theme=default]) x-tabs {
@@ -106,7 +122,7 @@
 
           :host([theme=default]) [default] {
             display: block;
-            margin-top: -1rem;
+            margin-top: 0rem;
             padding: 0.5rem;
             background-color: transparent;
             border: 1px solid lightgray;
@@ -114,12 +130,10 @@
           }
           x-tabs { 
             display: flex; 
-            background-color: gray; 
           }
           x-tab {
             margin: 0 0.2rem;
             padding: 0 .75rem;
-            background-color: #e3e0e0;
           }
         </style>
         <x-tabs></x-tabs>
@@ -139,6 +153,8 @@
       let titleEls = unassignedEls.filter(el => el.matches("[x-title]"));
       let contentEls = unassignedEls.filter(el => el.matches("[x-content]"));
       let size = Math.min(titleEls.length, contentEls.length);
+      let specifiedIndex = this.activeTabIndex || 0;
+      
       if (titleEls.length !== size) {
         console.warn("mismatch in panel-set title/content pairs...");
       }
@@ -154,12 +170,16 @@
         let tab = titleEls[i];
         let content = contentEls[i];
 
+        if (tab.hasAttribute('x-active')) {
+          specifiedIndex = i;
+        }
+        
         // tabs are -1, they need to use roving focus :(
         tab.tabIndex = -1;
-        tab.role = "tab";
+        tab.setAttribute("role","tab");
         tab.id = tabUId;
         tab.setAttribute("aria-controls", contentUId);
-        content.role = "tabpanel";
+        content.setAttribute("role","tabpanel");
         content.tabIndex = 0;
         content.id = contentUId;
         tab._init = true;
@@ -177,18 +197,17 @@
             "text/html"
           )
         );
-        // setting these would project them, but in theory leave them in place...
-        //titleEls[i].slot = tabUId
       }
-      // todo: figure this part out dynamically...
-      this.activeTabIndex = 0;
-      this.activeTab = this.tabSources[0];
-      let mql = window.matchMedia("(max-width: 720px)");
-      let mqh = evt => {
-        this.setAttribute("display", mql.matches ? "accordion" : "tabs");
-      };
-      mql.addListener(mqh);
-      mqh();
+      
+      this.activeTabIndex = specifiedIndex;
+      this.activeTab = this.tabSources[this.activeTabIndex]
+      
+      let specifiedDisplay = this.getAttribute('display') || 'accordion'
+      if (specifiedDisplay === 'tabs') {
+        this.setAttribute('display', 'tabs')
+      } else {
+        this.setAttribute('display', 'accordion')
+      }
     });
 
     this.addEventListener(
@@ -214,8 +233,6 @@
       false
     );
 
-    // let tabEls = [...this.querySelectorAll(":scope>.title")];
-    // contentEls = [...this.querySelectorAll(":scope>.content")];
   }
 }
 
@@ -224,5 +241,6 @@
     return `cp${++PanelSetTwo.prototype.lastUid}`;
   };
 
-  customElements.define("panel-set-two", PanelSetTwo);
+  customElements.define("panel-set", PanelSetTwo); 
+  
 })();
